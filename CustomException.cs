@@ -7,7 +7,7 @@ namespace CustomException
     {
         public UserMismatchingException(Competitor User) : base()
         {
-            Console.WriteLine($"{( (ICompetitor) User ).GetName()}ÎŞÈ¨ÏŞÊ¹ÓÃ¼¼ÄÜ");
+            Console.WriteLine($"{( (ICompetitor) User ).GetName()}æ— æƒé™ä½¿ç”¨æŠ€èƒ½");
         }
     }
 }
