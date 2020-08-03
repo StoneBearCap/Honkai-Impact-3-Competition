@@ -2,7 +2,7 @@ using BaseClass;
 
 namespace CompetitorSetting
 {
-    //ç÷ÑÇÄÈ
+    //çªäºšå¨œ
     class Kiana : Competitor, ICompetitor
     {
         public Kiana()
@@ -26,7 +26,7 @@ namespace CompetitorSetting
             return "Kiana";
         }
     }
-    //À×µçÑ¿ÒÂ
+    //é›·ç”µèŠ½è¡£
     class RaidenMei : Competitor, ICompetitor
     {
         public RaidenMei()
@@ -49,7 +49,7 @@ namespace CompetitorSetting
             return "RaidenMei";
         }
     }
-    //ÀöËşÂåË¿Ş±Éª
+    //ä¸½å¡”æ´›ä¸è–‡ç‘Ÿ
     class RitaRossweisse : Competitor, ICompetitor
     {
         public RitaRossweisse()
@@ -72,7 +72,7 @@ namespace CompetitorSetting
             return "RitaRossweisse";
         }
     }
-    //µÂÀòÉ¯
+    //å¾·è‰è
     class TheresaApocalypse : Competitor, ICompetitor
     {
         public TheresaApocalypse()
@@ -95,7 +95,7 @@ namespace CompetitorSetting
             return "TheresaApocalypse";
         }
     }
-    //¶ÉÑ»
+    //æ¸¡é¸¦
     class CorvusCorax : Competitor, ICompetitor
     {
         public CorvusCorax()
@@ -118,7 +118,7 @@ namespace CompetitorSetting
             return "CorvusCorax";
         }
     }
-    //²¼ÂåÄİæ«
+    //å¸ƒæ´›å¦®å¨…
     class Bronya : Competitor, ICompetitor
     {
         public Bronya()
@@ -141,7 +141,7 @@ namespace CompetitorSetting
             return "Bronya";
         }
     }
-    //¿¨Á«&°ËÖØÓ£
+    //å¡è²&å…«é‡æ¨±
     class KallenAndSakura : Competitor, ICompetitor
     {
         public KallenAndSakura()
