@@ -164,4 +164,30 @@ namespace CompetitorSetting
             return "KallenAndSakura";
         }
     }
+    //希儿
+    class SeeleVollerei : Competitor, ICompetitor
+    {
+        public enum SeeleVollereiColor { Black, White};
+        public SeeleVollereiColor Color { get; set; }
+        public SeeleVollerei()
+        {
+            Color = SeeleVollereiColor.White;
+            Health = 100;
+            Attack = 23;
+            Defense = 13;
+            Speed = 26;
+            IsPhysical = true;
+            IsCharmed = false;
+            CharmedTime = 0;
+            IsVertigo = false;
+            IsParalysis = false;
+            HasBeenCharmed = false;
+            AttackPercentage = 100;
+            HitRate = 100;
+        }
+        public string GetName()
+        {
+            return "SeeleVollerei";
+        }
+    }
 }
