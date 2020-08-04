@@ -30,7 +30,7 @@ namespace CompetitionClass
             Count = 0;
         }
 
-        //¹¥»÷Ç°½×¶Î
+        //æ”»å‡»å‰é˜¶æ®µ
         private void PreparatoryPhase(Competitor Character)
         {
             Func<Competitor, Competitor> Another = (Competitor Character) =>
@@ -46,22 +46,22 @@ namespace CompetitionClass
             };
             if(( (ICompetitor) Character ).GetName() == "Kiana")
             {
-                //ç÷ÑÇÄÈÎŞ¹¥»÷Ç°½×¶Î
+                //çªäºšå¨œæ— æ”»å‡»å‰é˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "RaidenMei")
             {
-                //Ñ¿ÒÂÎŞ¹¥»÷Ç°½×¶Î
+                //èŠ½è¡£æ— æ”»å‡»å‰é˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "RitaRossweisse")
             {
-                //ÀöËşÎŞ¹¥»÷Ç°½×¶Î
+                //ä¸½å¡”æ— æ”»å‡»å‰é˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "TheresaApocalypse")
             {
-                //µÂÀòÉ¯ÎŞ¹¥»÷Ç°½×¶Î
+                //å¾·è‰èæ— æ”»å‡»å‰é˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "CorvusCorax")
@@ -72,21 +72,25 @@ namespace CompetitionClass
                 }
                 else
                 {
-                    //¶ÉÑ»³ıÁËµÚÒ»»ØºÏÍâÎŞ¹¥»÷Ç°½×¶Î
+                    //æ¸¡é¸¦é™¤äº†ç¬¬ä¸€å›åˆå¤–æ— æ”»å‡»å‰é˜¶æ®µ
                     return;
                 }
             }
             else if(( (ICompetitor) Character ).GetName() == "Bronya")
             {
-                //²¼ÂåÄİæ«ÎŞ¹¥»÷Ç°½×¶Î
+                //å¸ƒæ´›å¦®å¨…æ— æ”»å‡»å‰é˜¶æ®µ
                 return;
             }
-            else if(( (ICompetitor)Character).GetName() == "KallenAndSakura")
+            else if(( (ICompetitor) Character ).GetName() == "KallenAndSakura")
             {
                 Character.EffectedBySakura();
             }
+            else if(( (ICompetitor) Character ).GetName() == "SeeleVollerei")
+            {
+                Character.EffectedBySeeleVollerei();
+            }
         }
-        //¹¥»÷½×¶Î
+        //æ”»å‡»é˜¶æ®µ
         private void AttackingPhase(Competitor Character, bool HasSkills = true)
         {
             Func<Competitor, Competitor> Another = (Competitor Character) =>
@@ -212,8 +216,12 @@ namespace CompetitionClass
                     Defender.GetAttacked(Character);
                 }
             }
+            else if(((ICompetitor)Character).GetName()== "SeeleVollerei")
+            {
+                Defender.GetAttacked(Character);
+            }
         }
-        //¹¥»÷ºó½×¶Î
+        //æ”»å‡»åé˜¶æ®µ
         private void EndPhase(Competitor Character)
         {
             Func<Competitor, Competitor> Another = (Competitor Character) =>
@@ -229,17 +237,17 @@ namespace CompetitionClass
             };
             if(( (ICompetitor) Character ).GetName() == "Kiana")
             {
-                //ç÷ÑÇÄÈÎŞ¹¥»÷ºó½×¶Î
+                //çªäºšå¨œæ— æ”»å‡»åé˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "RaidenMei")
             {
-                //Ñ¿ÒÂÎŞ¹¥»÷ºó½×¶Î
+                //èŠ½è¡£æ— æ”»å‡»åé˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "RitaRossweisse")
             {
-                //ÀöËşÎŞ¹¥»÷ºó½×¶Î
+                //ä¸½å¡”æ— æ”»å‡»åé˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "TheresaApocalypse")
@@ -248,7 +256,7 @@ namespace CompetitionClass
             }
             else if(( (ICompetitor) Character ).GetName() == "CorvusCorax")
             {
-                //¶ÉÑ»ÎŞ¹¥»÷ºó½×¶Î
+                //æ¸¡é¸¦æ— æ”»å‡»åé˜¶æ®µ
                 return;
             }
             else if(( (ICompetitor) Character ).GetName() == "Bronya")
@@ -257,7 +265,12 @@ namespace CompetitionClass
             }
             else if(( (ICompetitor) Character ).GetName() == "KallenAndSakura")
             {
-                //¿¨Á«&°ËÖØÓ£ÎŞ¹¥»÷ºó½×¶Î
+                //å¡è²&å…«é‡æ¨±æ— æ”»å‡»åé˜¶æ®µ
+                return;
+            }
+            else if(((ICompetitor)Character).GetName()== "SeeleVollerei")
+            {
+                //å¸Œå„¿æ— æ”»å‡»åé˜¶æ®µ
                 return;
             }
         }
@@ -300,7 +313,7 @@ namespace CompetitionClass
             }
             else
             {
-                Console.WriteLine($"{( (ICompetitor) Character ).GetName()}Ìø¹ı¹¥»÷Ç°½×¶Î");
+                Console.WriteLine($"{( (ICompetitor) Character ).GetName()}è·³è¿‡æ”»å‡»å‰é˜¶æ®µ");
             }
             AttackingPhase(Character, HasSkills);
             if(Another(Character).Health == 0)
@@ -313,7 +326,7 @@ namespace CompetitionClass
             }
             else
             {
-                Console.WriteLine($"{( (ICompetitor) Character ).GetName()}Ìø¹ı¹¥»÷ºó½×¶Î");
+                Console.WriteLine($"{( (ICompetitor) Character ).GetName()}è·³è¿‡æ”»å‡»åé˜¶æ®µ");
             }
             if(Character.CharmedTime == 0)
             {
@@ -337,12 +350,12 @@ namespace CompetitionClass
             while(true)
             {
                 Count++;
-                Console.WriteLine($"µÚ{Count}»ØºÏ");
+                Console.WriteLine($"ç¬¬{Count}å›åˆ");
                 Action(CurrnetCharacter);
                 if(Another(CurrnetCharacter).Health == 0)
                 {
                     Winner = CurrnetCharacter;
-                    Console.WriteLine($"{( (ICompetitor) CurrnetCharacter ).GetName()}Ê¤Àû£¬Ê£ÏÂ{CurrnetCharacter.Health}µãÉúÃü");
+                    Console.WriteLine($"{( (ICompetitor) CurrnetCharacter ).GetName()}èƒœåˆ©ï¼Œå‰©ä¸‹{CurrnetCharacter.Health}ç‚¹ç”Ÿå‘½");
                     break;
                 }
                 CurrnetCharacter = Another(CurrnetCharacter);
@@ -350,7 +363,7 @@ namespace CompetitionClass
                 if(Another(CurrnetCharacter).Health == 0)
                 {
                     Winner = CurrnetCharacter;
-                    Console.WriteLine($"{( (ICompetitor) CurrnetCharacter ).GetName()}Ê¤Àû£¬Ê£ÏÂ{CurrnetCharacter.Health}µãÉúÃü");
+                    Console.WriteLine($"{( (ICompetitor) CurrnetCharacter ).GetName()}èƒœåˆ©ï¼Œå‰©ä¸‹{CurrnetCharacter.Health}ç‚¹ç”Ÿå‘½");
                     break;
                 }
                 CurrnetCharacter = Another(CurrnetCharacter);
