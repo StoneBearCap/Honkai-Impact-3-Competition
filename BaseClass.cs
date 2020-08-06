@@ -39,7 +39,7 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(User);
                 }
-                int FellowAttack = this.Attack;
+                int PreviousAttack = Attack;
                 if(Attack > 4)
                 {
                     Attack -= 4;
@@ -48,8 +48,8 @@ namespace BaseClass
                 {
                     Attack = 0;
                 }
-                this.Health += 3;
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能女仆的温柔清理，降低{( (ICompetitor) this ).GetName()}{FellowAttack - Attack}点攻击力");
+                Health += 3;
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能女仆的温柔清理，降低{( (ICompetitor) this ).GetName()}{PreviousAttack - Attack}点攻击力");
             }
             catch(UserMismatchingException)
             {
@@ -70,7 +70,7 @@ namespace BaseClass
                 CharmedTime = 2;
                 if(HasBeenCharmed == false)
                 {
-                    this.AttackPercentage = this.AttackPercentage * 60 / 100;
+                    AttackPercentage = AttackPercentage * 60 / 100;
                 }
                 HasBeenCharmed = true;
                 Console.WriteLine($"{((ICompetitor)User).GetName()}对{((ICompetitor)this).GetName()}使用魅惑技能，使其进入魅惑状态两回合（期间不能使用技能），永久降低60%伤害");
@@ -82,20 +82,55 @@ namespace BaseClass
         }
         public void ClearChramed()
         {
-            if(this.IsCharmed == true)
+            if(IsCharmed == true)
             {
-                this.IsCharmed = false;
+                IsCharmed = false;
             }
         }
+        //符华技能：形之笔墨，对敌人
+        //每三个回合发动一次，造成18点元素伤害，降低对手25%命中率，可叠加
+        public void EffectedByFuHua(Competitor User)
+        {
+            try
+            {
+                if(( (ICompetitor) User ).GetName() != "FuHua")
+                {
+                    throw new UserMismatchingException(User);
+                }
+                if(ProbabilityFunction(User.HitRate))
+                {
+                    int AttackValue = 18 * User.AttackPercentage / 100;
+                    int PreviousHealth = Health;
+                    int PreviousHitRate = HitRate;
+                    if(Health >= AttackValue)
+                    {
+                        Health -= AttackValue;
+                    }
+                    else
+                    {
+                        Health = 0;
+                    }
+                    if(HitRate >= 25)
+                    {
+                        HitRate -= 25;
+                    }
+                    else
+                    {
+                        HitRate = 0;
+                    }
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能形之笔墨，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害，降低{PreviousHitRate - HitRate}%命中率");
 
-
-        //符华
-        //
-
-
-        //符华
-        //
-
+                }
+                else
+                {
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能形之笔墨未命中");
+                }
+            }
+            catch(UserMismatchingException)
+            {
+                return;
+            }
+        }
         //德莉莎1技能：血犹大第一可爱，对敌人
         //效果，攻击后30%概率降低5点防御
         public void EffectedByTheresaApocalypse_Judas(Competitor User)
@@ -108,7 +143,7 @@ namespace BaseClass
                 }
                 if(ProbabilityFunction(30))
                 {
-                    int FellowDefense = Defense;
+                    int PreviousDefense = Defense;
                     if(Defense > 5)
                     {
                         Defense -= 5;
@@ -117,7 +152,7 @@ namespace BaseClass
                     {
                         Defense = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能血犹大第一可爱，降低{( (ICompetitor) this ).GetName()}{FellowDefense - Defense}点防御");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能血犹大第一可爱，降低{( (ICompetitor) this ).GetName()}{PreviousDefense - Defense}点防御");
                 }
                 else
                 {
@@ -139,7 +174,7 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(User);
                 }
-                int FellowHealth = this.Health;
+                int PreviousHealth = Health;
                 for(int i = 1; i <= 5; i++)
                 {
                     if(ProbabilityFunction(User.HitRate))
@@ -161,7 +196,7 @@ namespace BaseClass
 
                     }
                 }
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能在线踢人，对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能在线踢人，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
             }
             catch(UserMismatchingException)
             {
@@ -180,10 +215,10 @@ namespace BaseClass
                 }
                 if(ProbabilityFunction(User.HitRate))
                 {
-                    int FellowHealth = this.Health;
-                    int AttackValue = User.Attack + this.Defense * 2 - this.Defense;
+                    int PreviousHealth = Health;
+                    int AttackValue = User.Attack + Defense * 2 - Defense;
                     AttackValue = AttackValue * User.AttackPercentage / 100;
-                    if(Health > AttackValue)
+                    if(Health >= AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -191,14 +226,14 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能吃我一矛！，对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能吃我一矛！，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                     Console.WriteLine($"{( (ICompetitor) this ).GetName()}剩下{Health}点体力");
                 }
                 else
                 {
                     Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能吃我一矛！，未命中");
                 }
-                EffectedByKiana_Voice(User);
+                User.EffectedByKiana_Voice();
             }
             catch(UserMismatchingException)
             {
@@ -207,18 +242,18 @@ namespace BaseClass
         }
         //琪亚娜2技能：音浪~太强~，对自己
         //效果，使用吃我一矛！时35%概率眩晕自己一回合
-        private void EffectedByKiana_Voice(Competitor User)
+        private void EffectedByKiana_Voice()
         {
             try
             {
-                if(( (ICompetitor) User ).GetName() != "Kiana")
+                if(( (ICompetitor) this ).GetName() != "Kiana")
                 {
-                    throw new UserMismatchingException(User);
+                    throw new UserMismatchingException(this);
                 }
                 if(ProbabilityFunction(35))
                 {
-                    User.IsVertigo = true;
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能音浪~太强~，使自己眩晕一回合");
+                    IsVertigo = true;
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能音浪~太强~，使自己眩晕一回合");
                 }
             }
             catch(UserMismatchingException)
@@ -235,7 +270,7 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(this);
                 }
-                if(this.IsVertigo == true)
+                if(IsVertigo == true)
                 {
                     IsVertigo = false;
                 }
@@ -257,7 +292,7 @@ namespace BaseClass
                 }
                 if(ProbabilityFunction(30))
                 {
-                    this.IsParalysis = true;
+                    IsParalysis = true;
                     Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能崩坏世界的歌姬，使{( (ICompetitor) this ).GetName()}麻痹一回合");
                 }
             }
@@ -269,9 +304,9 @@ namespace BaseClass
         //清除眩晕标记
         public void ResetParalysis()
         {
-            if(this.IsParalysis  == true)
+            if(IsParalysis  == true)
             {
-                this.IsParalysis = false;
+                IsParalysis = false;
             }
         }
         //芽衣2技能：雷电家的龙女仆，对敌人
@@ -284,13 +319,13 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(User);
                 }
-                int FellowHealth = this.Health;
+                int PreviousHealth = Health;
                 for(int i = 1; i <= 5; i++)
                 {
                     if(ProbabilityFunction(User.HitRate))
                     {
                         int AttackValue = 3 * User.AttackPercentage / 100;
-                        if(Health > AttackValue)
+                        if(Health >= AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -301,8 +336,8 @@ namespace BaseClass
                         }
                     }
                 }
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能雷电家的龙女仆，对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
-                Console.WriteLine($"{( (ICompetitor) this ).GetName()}剩下{this.Health}点体力");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能雷电家的龙女仆，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
+                Console.WriteLine($"{( (ICompetitor) this ).GetName()}剩下{Health}点体力");
             }
             catch(UserMismatchingException)
             {
@@ -321,14 +356,14 @@ namespace BaseClass
                 }
                 if(( (ICompetitor) Defender ).GetName() == "Kiana")
                 {
-                    this.AttackPercentage += 25;
+                    AttackPercentage += 25;
                     Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能不是针对你，提升自己对琪亚娜25%伤害");
                 }
                 else
                 {
                     if(ProbabilityFunction(25))
                     {
-                        this.AttackPercentage += 25;
+                        AttackPercentage += 25;
                         Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能不是针对你，提升自己25%伤害");
                     }
                 }
@@ -348,14 +383,14 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(User);
                 }
-                int FellowHealth = Health;
+                int PreviousHealth = Health;
                 for(int i = 1; i <= 7; i++)
                 {
                     if(ProbabilityFunction(User.HitRate))
                     {
-                        int AttackValue = 16 - this.Defense;
+                        int AttackValue = 16 - Defense;
                         AttackValue = AttackValue * User.AttackPercentage / 100;
-                        if(this.Health > AttackValue)
+                        if(Health > AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -370,7 +405,7 @@ namespace BaseClass
 
                     }
                 }
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能别墅小岛对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能别墅小岛对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                 Console.WriteLine($"{( (ICompetitor) this ).GetName()}剩下{Health}点体力");
             }
             catch(UserMismatchingException)
@@ -390,25 +425,25 @@ namespace BaseClass
                 }
                 if(ProbabilityFunction(25))
                 {
-                    int FellowHealth = this.Health;
+                    int PreviousHealth = Health;
                     for(int i = 1; i <= 4; i++)
                     {
                         if(ProbabilityFunction(User.HitRate))
                         {
-                            int AttackValue = 12 - this.Defense;
+                            int AttackValue = 12 - Defense;
                             AttackValue = AttackValue * User.AttackPercentage / 100;
-                            if(this.Health > AttackValue)
+                            if(Health >= AttackValue)
                             {
-                                this.Health -= AttackValue;
+                                Health -= AttackValue;
                             }
                             else
                             {
-                                this.Health = 0;
+                                Health = 0;
                                 break;
                             }
                         }
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能天使重构，对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能天使重构，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                     Console.WriteLine($"{( (ICompetitor) this ).GetName()}剩下{Health}点体力");
                 }
             }
@@ -427,13 +462,12 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(User);
                 }
-                Func<int> RandomResult = () => new Random().Next(1, 100);
                 if(ProbabilityFunction(User.HitRate))
                 {
-                    int AttackValue = RandomResult();
+                    int AttackValue = new Random().Next(1, 100);
                     AttackValue = AttackValue * User.AttackPercentage / 100;
-                    int FellowHealth = this.Health;
-                    if(this.Health > AttackValue)
+                    int PreviousHealth = Health;
+                    if(Health > AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -441,7 +475,7 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能摩托拜客哒！，对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能摩托拜客哒！，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                 }
                 else
                 {
@@ -465,9 +499,9 @@ namespace BaseClass
                 }
                 if(ProbabilityFunction(30))
                 {
-                    int FellowHealth = this.Health;
+                    int PreviousHealth = Health;
                     Health = ( 100 - Health ) >= 25 ? Health + 25 : 100;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能八重樱的饭团，回复自己{Health-FellowHealth}点血量");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能八重樱的饭团，回复自己{Health-PreviousHealth}点血量");
                 }
             }
             catch(UserMismatchingException)
@@ -487,17 +521,17 @@ namespace BaseClass
                 }
                 if(ProbabilityFunction(User.HitRate))
                 {
-                    int FellowHealth = this.Health;
+                    int PreviousHealth = Health;
                     int AttackValue = 25 * User.AttackPercentage / 100;
-                    if(this.Health > AttackValue)
+                    if(Health > AttackValue)
                     {
-                        this.Health -= AttackValue;
+                        Health -= AttackValue;
                     }
                     else
                     {
-                        this.Health = 0;
+                        Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能卡莲的饭团，对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}发动技能卡莲的饭团，对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                 }
                 else
                 {
@@ -524,25 +558,25 @@ namespace BaseClass
                 //黑变白
                 if(( (SeeleVollerei) this ).Color == SeeleVollerei.SeeleVollereiColor.Black)
                 {
-                    int FellowHealth = this.Health;
-                    int FellowAttack = this.Attack;
-                    int FellowDefense = this.Defense;
+                    int PreviousHealth = Health;
+                    int PreviousAttack = Attack;
+                    int PreviousDefense = Defense;
                     ( (SeeleVollerei) this ).Color = SeeleVollerei.SeeleVollereiColor.White;
                     int RandomResult = new Random().Next(1, 15);
-                    this.Health = this.Health + RandomResult >= 100 ? 100 : this.Health + RandomResult;
-                    this.Attack = this.Attack >= 10 ? this.Attack - 10 : 0;
-                    this.Defense += 5;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能我换我自己，“去吧，希儿，去守护我们的约定”，降低{FellowAttack - Attack}点攻击，提升{Health - FellowHealth}点生命，提升{this.Defense - FellowDefense}点防御");
+                    Health = Health + RandomResult >= 100 ? 100 : Health + RandomResult;
+                    Attack = Attack >= 10 ? Attack - 10 : 0;
+                    Defense += 5;
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能我换我自己，“去吧，希儿，去守护我们的约定”，降低{PreviousAttack - Attack}点攻击，提升{Health - PreviousHealth}点生命，提升{Defense - PreviousDefense}点防御");
                 }
                 //白变黑
                 else if(( (SeeleVollerei) this ).Color == SeeleVollerei.SeeleVollereiColor.White)
                 {
-                    int FellowAttack = this.Attack;
-                    int FellowDefense = this.Defense;
+                    int PreviousAttack = Attack;
+                    int PreviousDefense = Defense;
                     ( (SeeleVollerei) this ).Color = SeeleVollerei.SeeleVollereiColor.Black;
-                    this.Attack += 10;
-                    this.Defense = this.Defense >= 5 ? this.Defense - 5 : 0;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能我换我自己，“拜托了，另一个我”，提升{this.Attack - FellowAttack}点攻击，降低{FellowDefense - this.Defense}点防御");
+                    Attack += 10;
+                    Defense = Defense >= 5 ? Defense - 5 : 0;
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}发动技能我换我自己，“拜托了，另一个我”，提升{Attack - PreviousAttack}点攻击，降低{PreviousDefense - Defense}点防御");
                 }
             }
             catch(UserMismatchingException)
@@ -550,6 +584,25 @@ namespace BaseClass
                 return;
             }
         }
+        //姬子1技能：真爱不死，对自己
+        //对非单人队伍造成伤害提升100%
+        public void EffectedByHimeko_Love()
+        {
+            try
+            {
+
+
+            }
+            catch(UserMismatchingException)
+            {
+                return;
+            }
+        }
+
+
+        //
+        //
+
 
         //普通攻击
         public void GetAttacked(Competitor Attacker)
@@ -557,11 +610,11 @@ namespace BaseClass
             //普通攻击命中
             if(ProbabilityFunction(Attacker.HitRate))
             {
-                int FellowHealth = Health;
+                int PreviousHealth = Health;
                 //物理攻击
                 if(Attacker.IsPhysical == true)
                 {
-                    int AttackValue = Attacker.Attack - this.Defense;
+                    int AttackValue = Attacker.Attack - Defense;
                     AttackValue = AttackValue * Attacker.AttackPercentage / 100;
                     if(AttackValue < 0)
                     {
@@ -570,7 +623,7 @@ namespace BaseClass
                     }
                     else
                     {
-                        if(Health > AttackValue)
+                        if(Health >= AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -578,7 +631,7 @@ namespace BaseClass
                         {
                             Health = 0;
                         }
-                        Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}普通攻击对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                        Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}普通攻击对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                     }
                 }
                 //元素攻击
@@ -586,7 +639,7 @@ namespace BaseClass
                 {
                     int AttackValue = Attacker.Attack;
                     AttackValue = AttackValue * Attacker.AttackPercentage / 100;
-                    if(Health > AttackValue)
+                    if(Health >= AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -594,7 +647,7 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}普通攻击对{( (ICompetitor) this ).GetName()}造成{FellowHealth - Health}点伤害");
+                    Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}普通攻击对{( (ICompetitor) this ).GetName()}造成{PreviousHealth - Health}点伤害");
                 }
                 Console.WriteLine($"{( (ICompetitor) this ).GetName()}剩下{Health}点生命值");
             }
