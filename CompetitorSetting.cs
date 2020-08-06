@@ -213,7 +213,7 @@ namespace CompetitorSetting
             return "FuHua";
         }
     }
-    //
+    //姬子
     class Himeko : Competitor, ICompetitor
     {
         public Himeko()
