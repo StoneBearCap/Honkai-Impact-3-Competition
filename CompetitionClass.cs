@@ -89,6 +89,11 @@ namespace CompetitionClass
             {
                 Character.EffectedBySeeleVollerei();
             }
+            else if(( (ICompetitor) Character ).GetName() == "FuHua")
+            {
+                //符华无攻击前阶段
+                return;
+            }
         }
         //攻击阶段
         private void AttackingPhase(Competitor Character, bool HasSkills = true)
@@ -220,6 +225,20 @@ namespace CompetitionClass
             {
                 Defender.GetAttacked(Character);
             }
+            else if(( (ICompetitor) Character ).GetName() == "FuHua")
+            {
+                if(Count % 3 == 0)
+                {
+                    if(HasSkills)
+                    {
+                        Defender.EffectedByFuHua(Character);
+                    }
+                }
+                else
+                {
+                    Defender.GetAttacked(Character);
+                }
+            }
         }
         //攻击后阶段
         private void EndPhase(Competitor Character)
@@ -271,6 +290,11 @@ namespace CompetitionClass
             else if(((ICompetitor)Character).GetName()== "SeeleVollerei")
             {
                 //希儿无攻击后阶段
+                return;
+            }
+            else if(( (ICompetitor) Character ).GetName() == "FuHua")
+            {
+                //符华无攻击后阶段
                 return;
             }
         }
