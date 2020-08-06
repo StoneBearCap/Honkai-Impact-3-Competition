@@ -190,4 +190,50 @@ namespace CompetitorSetting
             return "SeeleVollerei";
         }
     }
+    //符华
+    class FuHua : Competitor, ICompetitor
+    {
+        public FuHua()
+        {
+            Health = 100;
+            Attack = 17;
+            Defense = 15;
+            Speed = 16;
+            IsPhysical = false;
+            IsCharmed = false;
+            CharmedTime = 0;
+            IsVertigo = false;
+            IsParalysis = false;
+            HasBeenCharmed = false;
+            AttackPercentage = 100;
+            HitRate = 100;
+        }
+        public string GetName()
+        {
+            return "FuHua";
+        }
+    }
+    //
+    class Himeko : Competitor, ICompetitor
+    {
+        public Himeko()
+        {
+            Health = 100;
+            Attack = 23;
+            Defense = 9;
+            Speed = 12;
+            IsPhysical = true;
+            IsCharmed = false;
+            CharmedTime = 0;
+            IsVertigo = false;
+            IsParalysis = false;
+            HasBeenCharmed = false;
+            AttackPercentage = 100;
+            HitRate = 100;
+        }
+        public string GetName()
+        {
+            return "Himeko";
+        }
+    }
 }
