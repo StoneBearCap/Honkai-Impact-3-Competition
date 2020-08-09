@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CustomException;
 using CompetitorSetting;
 using CompetitionClass;
+using BaseClass;
 
 namespace MyCompetition
 {
     class Program
     {
-        public static void Main()
+        public static void TaskFunction()
         {
             int AW = 0, BW = 0;
-            for(int i = 1; i <= 10; i++)
+            for(int i = 1; i <= 1000; i++)
             {
-                var A = new TheresaApocalypse();
+                var A = new Himeko();
                 var B = new KallenAndSakura();
-                var TCompetition = new Competition<TheresaApocalypse, KallenAndSakura>(A, B);
+                var TCompetition = new Competition<Himeko, KallenAndSakura>(A, B);
+                Console.WriteLine($"第{i}局");
                 TCompetition.TaskFunction();
+                Console.WriteLine();
                 if(TCompetition.Winner == A)
                 {
                     AW++;
@@ -27,7 +29,10 @@ namespace MyCompetition
                 }
             }
             Console.WriteLine($"{AW} {BW}");
-            Console.ReadLine();
+        }
+        public static void Main()
+        {
+            TaskFunction();
         }
     }
 }
