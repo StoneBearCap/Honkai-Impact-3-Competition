@@ -6,31 +6,31 @@ namespace BaseClass
 {
     class Competitor
     {
-        //¸ÅÂÊÄäÃûÎ¯ÍĞ
+        //æ¦‚ç‡åŒ¿åå§”æ‰˜
         Func<int, bool> ProbabilityFunction = (int ProbabilityValue) => 
             new Random().Next(1, 100) <= ProbabilityValue ? true : false;
         public int Health { get; protected set; }
         public int Attack { get; protected set; }
         public int Defense { get; protected set; }
         public int Speed { get; protected set; }
-        //ÊÇ·ñÊÇÎïÀí¹¥»÷£¬·û»ªÎªÔªËØ
+        //æ˜¯å¦æ˜¯ç‰©ç†æ”»å‡»ï¼Œç¬¦åä¸ºå…ƒç´ 
         public bool IsPhysical { get; protected set; }
-        //ÃüÖĞÂÊ,100Îª³õÊ¼Öµ£¬¼´100%
+        //å‘½ä¸­ç‡,100ä¸ºåˆå§‹å€¼ï¼Œå³100%
         public int HitRate { get; protected set; }
-        //ÊÇ·ñ±»Âé±Ô£¨Ñ¿ÒÂ¹¥»÷¸ÅÂÊÂé±Ô£©
+        //æ˜¯å¦è¢«éº»ç—¹ï¼ˆèŠ½è¡£æ”»å‡»æ¦‚ç‡éº»ç—¹ï¼‰
         public bool IsParalysis { get; protected set; }
-        //È«ÉËº¦±ÈÀı,100Îª³õÊ¼Öµ£¬¼´100%
+        //å…¨ä¼¤å®³æ¯”ä¾‹,100ä¸ºåˆå§‹å€¼ï¼Œå³100%
         public int AttackPercentage { get; protected set; }
-        //ç÷ÑÇÄÈÊÇ·ñ±»¼¼ÄÜ¸ºÃæÓ°ÏìÑ£ÔÎ
+        //çªäºšå¨œæ˜¯å¦è¢«æŠ€èƒ½è´Ÿé¢å½±å“çœ©æ™•
         public bool IsVertigo { get; protected set; }
-        //ÊÇ·ñ±»ÀöËş¼¼ÄÜ÷È»ó(ÈôÊÇ£¬ÔòÎŞ·¨Ê¹ÓÃ¼¼ÄÜÇÒÈ«ÉËº¦ÓÀ¾ÃÏÂ½µ60%³ÖĞøÁ½»ØºÏ)
+        //æ˜¯å¦è¢«ä¸½å¡”æŠ€èƒ½é­…æƒ‘(è‹¥æ˜¯ï¼Œåˆ™æ— æ³•ä½¿ç”¨æŠ€èƒ½ä¸”å…¨ä¼¤å®³æ°¸ä¹…ä¸‹é™60%æŒç»­ä¸¤å›åˆ)
         public bool IsCharmed { get; protected set; }
-        //ÊÇ·ñÔø¾­±»ÀöËş¼¼ÄÜ÷È»ó
+        //æ˜¯å¦æ›¾ç»è¢«ä¸½å¡”æŠ€èƒ½é­…æƒ‘
         public bool HasBeenCharmed { get; protected set; }
-        //÷È»ó´ıÉúĞ§´ÎÊı
+        //é­…æƒ‘å¾…ç”Ÿæ•ˆæ¬¡æ•°
         public int CharmedTime { get; set; }
-        //ÀöËş1¼¼ÄÜ£ºÅ®ÆÍµÄÎÂÈáÇåÀí£¬¶ÔµĞÈË
-        //±»Ó°ÏìĞ§¹û£¬ÓÀ¾Ã½µµÍ¹¥»÷Á¦4µã
+        //ä¸½å¡”1æŠ€èƒ½ï¼šå¥³ä»†çš„æ¸©æŸ”æ¸…ç†ï¼Œå¯¹æ•Œäºº
+        //è¢«å½±å“æ•ˆæœï¼Œæ°¸ä¹…é™ä½æ”»å‡»åŠ›4ç‚¹
         public void EffectedByRitaRossweisse_Clear(Competitor User)
         {
             try
@@ -49,15 +49,15 @@ namespace BaseClass
                     Attack = 0;
                 }
                 Health += 3;
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜÅ®ÆÍµÄÎÂÈáÇåÀí£¬½µµÍ{( (ICompetitor) this ).GetName()}{PreviousAttack - Attack}µã¹¥»÷Á¦");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å¥³ä»†çš„æ¸©æŸ”æ¸…ç†ï¼Œé™ä½{( (ICompetitor) this ).GetName()}{PreviousAttack - Attack}ç‚¹æ”»å‡»åŠ›");
             }
             catch(UserMismatchingException)
             {
                 return;
             }
         }
-        //ÀöËş2¼¼ÄÜ£ºÍêÃÀĞÄÒâ£¬¶ÔµĞÈË
-        //Ğ§¹û£¬½øÈë÷È»ó×´Ì¬2»ØºÏ
+        //ä¸½å¡”2æŠ€èƒ½ï¼šå®Œç¾å¿ƒæ„ï¼Œå¯¹æ•Œäºº
+        //æ•ˆæœï¼Œè¿›å…¥é­…æƒ‘çŠ¶æ€2å›åˆ
         public void EffectedByRitaRossweisse_Mind(Competitor User)
         {
             try
@@ -73,7 +73,7 @@ namespace BaseClass
                     AttackPercentage = AttackPercentage * 60 / 100;
                 }
                 HasBeenCharmed = true;
-                Console.WriteLine($"{((ICompetitor)User).GetName()}¶Ô{((ICompetitor)this).GetName()}Ê¹ÓÃ÷È»ó¼¼ÄÜ£¬Ê¹Æä½øÈë÷È»ó×´Ì¬Á½»ØºÏ£¨ÆÚ¼ä²»ÄÜÊ¹ÓÃ¼¼ÄÜ£©£¬ÓÀ¾Ã½µµÍ60%ÉËº¦");
+                Console.WriteLine($"{((ICompetitor)User).GetName()}å¯¹{((ICompetitor)this).GetName()}ä½¿ç”¨é­…æƒ‘æŠ€èƒ½ï¼Œä½¿å…¶è¿›å…¥é­…æƒ‘çŠ¶æ€ä¸¤å›åˆï¼ˆæœŸé—´ä¸èƒ½ä½¿ç”¨æŠ€èƒ½ï¼‰ï¼Œæ°¸ä¹…é™ä½60%ä¼¤å®³");
             }
             catch(UserMismatchingException)
             {
@@ -87,8 +87,8 @@ namespace BaseClass
                 IsCharmed = false;
             }
         }
-        //·û»ª¼¼ÄÜ£ºĞÎÖ®±ÊÄ«£¬¶ÔµĞÈË
-        //Ã¿Èı¸ö»ØºÏ·¢¶¯Ò»´Î£¬Ôì³É18µãÔªËØÉËº¦£¬½µµÍ¶ÔÊÖ25%ÃüÖĞÂÊ£¬¿Éµş¼Ó
+        //ç¬¦åæŠ€èƒ½ï¼šå½¢ä¹‹ç¬”å¢¨ï¼Œå¯¹æ•Œäºº
+        //æ¯ä¸‰ä¸ªå›åˆå‘åŠ¨ä¸€æ¬¡ï¼Œé€ æˆ18ç‚¹å…ƒç´ ä¼¤å®³ï¼Œé™ä½å¯¹æ‰‹25%å‘½ä¸­ç‡ï¼Œå¯å åŠ 
         public void EffectedByFuHua(Competitor User)
         {
             try
@@ -118,12 +118,12 @@ namespace BaseClass
                     {
                         HitRate = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜĞÎÖ®±ÊÄ«£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦£¬½µµÍ{PreviousHitRate - HitRate}%ÃüÖĞÂÊ");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å½¢ä¹‹ç¬”å¢¨ï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³ï¼Œé™ä½{PreviousHitRate - HitRate}%å‘½ä¸­ç‡");
 
                 }
                 else
                 {
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜĞÎÖ®±ÊÄ«Î´ÃüÖĞ");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å½¢ä¹‹ç¬”å¢¨æœªå‘½ä¸­");
                 }
             }
             catch(UserMismatchingException)
@@ -131,8 +131,8 @@ namespace BaseClass
                 return;
             }
         }
-        //µÂÀòÉ¯1¼¼ÄÜ£ºÑªÓÌ´óµÚÒ»¿É°®£¬¶ÔµĞÈË
-        //Ğ§¹û£¬¹¥»÷ºó30%¸ÅÂÊ½µµÍ5µã·ÀÓù
+        //å¾·è‰è1æŠ€èƒ½ï¼šè¡€çŠ¹å¤§ç¬¬ä¸€å¯çˆ±ï¼Œå¯¹æ•Œäºº
+        //æ•ˆæœï¼Œæ”»å‡»å30%æ¦‚ç‡é™ä½5ç‚¹é˜²å¾¡
         public void EffectedByTheresaApocalypse_Judas(Competitor User)
         {
             try
@@ -152,7 +152,7 @@ namespace BaseClass
                     {
                         Defense = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜÑªÓÌ´óµÚÒ»¿É°®£¬½µµÍ{( (ICompetitor) this ).GetName()}{PreviousDefense - Defense}µã·ÀÓù");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½è¡€çŠ¹å¤§ç¬¬ä¸€å¯çˆ±ï¼Œé™ä½{( (ICompetitor) this ).GetName()}{PreviousDefense - Defense}ç‚¹é˜²å¾¡");
                 }
                 else
                 {
@@ -164,8 +164,8 @@ namespace BaseClass
                 return;
             }
         }
-        //µÂÀòÉ¯2¼¼ÄÜ£ºÔÚÏßÌßÈË,¶ÔµĞÈË
-        //Ğ§¹û£¬Ôì³É5*16ÉËº¦
+        //å¾·è‰è2æŠ€èƒ½ï¼šåœ¨çº¿è¸¢äºº,å¯¹æ•Œäºº
+        //æ•ˆæœï¼Œé€ æˆ5*16ä¼¤å®³
         public void EffectedByTheresaApocalypse_Kick(Competitor User)
         {
             try
@@ -196,15 +196,15 @@ namespace BaseClass
 
                     }
                 }
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜÔÚÏßÌßÈË£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½åœ¨çº¿è¸¢äººï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
             }
             catch(UserMismatchingException)
             {
                 return;
             }
         }
-        //ç÷ÑÇÄÈ1¼¼ÄÜ£º³ÔÎÒÒ»Ã¬£¡£¬¶ÔµĞÈË
-        //Ğ§¹û£¬Ã¿Á½¸ö»ØºÏ·¢¶¯£¬±¾´Î¹¥»÷µÄ¹¥»÷Á¦ÉÏÉı2±¶¶ÔÊÖ·ÀÓùÖµ
+        //çªäºšå¨œ1æŠ€èƒ½ï¼šåƒæˆ‘ä¸€çŸ›ï¼ï¼Œå¯¹æ•Œäºº
+        //æ•ˆæœï¼Œæ¯ä¸¤ä¸ªå›åˆå‘åŠ¨ï¼Œæœ¬æ¬¡æ”»å‡»çš„æ”»å‡»åŠ›ä¸Šå‡2å€å¯¹æ‰‹é˜²å¾¡å€¼
         public void EffectedByKiana_Spear(Competitor User)
         {
             try
@@ -226,12 +226,12 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜ³ÔÎÒÒ»Ã¬£¡£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}Ê£ÏÂ{Health}µãÌåÁ¦");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½åƒæˆ‘ä¸€çŸ›ï¼ï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‰©ä¸‹{Health}ç‚¹ä½“åŠ›");
                 }
                 else
                 {
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜ³ÔÎÒÒ»Ã¬£¡£¬Î´ÃüÖĞ");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½åƒæˆ‘ä¸€çŸ›ï¼ï¼Œæœªå‘½ä¸­");
                 }
                 User.EffectedByKiana_Voice();
             }
@@ -240,8 +240,8 @@ namespace BaseClass
                 return;
             }
         }
-        //ç÷ÑÇÄÈ2¼¼ÄÜ£ºÒôÀË~Ì«Ç¿~£¬¶Ô×Ô¼º
-        //Ğ§¹û£¬Ê¹ÓÃ³ÔÎÒÒ»Ã¬£¡Ê±35%¸ÅÂÊÑ£ÔÎ×Ô¼ºÒ»»ØºÏ
+        //çªäºšå¨œ2æŠ€èƒ½ï¼šéŸ³æµª~å¤ªå¼º~ï¼Œå¯¹è‡ªå·±
+        //æ•ˆæœï¼Œä½¿ç”¨åƒæˆ‘ä¸€çŸ›ï¼æ—¶35%æ¦‚ç‡çœ©æ™•è‡ªå·±ä¸€å›åˆ
         private void EffectedByKiana_Voice()
         {
             try
@@ -253,7 +253,7 @@ namespace BaseClass
                 if(ProbabilityFunction(35))
                 {
                     IsVertigo = true;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜÒôÀË~Ì«Ç¿~£¬Ê¹×Ô¼ºÑ£ÔÎÒ»»ØºÏ");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½éŸ³æµª~å¤ªå¼º~ï¼Œä½¿è‡ªå·±çœ©æ™•ä¸€å›åˆ");
                 }
             }
             catch(UserMismatchingException)
@@ -261,7 +261,7 @@ namespace BaseClass
                 return;
             }
         }
-        //Çå³ıÑ£ÔÎ±ê¼Ç£¬½ö¶Ôç÷ÑÇÄÈ×Ô¼ºÓĞĞ§
+        //æ¸…é™¤çœ©æ™•æ ‡è®°ï¼Œä»…å¯¹çªäºšå¨œè‡ªå·±æœ‰æ•ˆ
         public void ResetVertigo()
         {
             try
@@ -280,8 +280,8 @@ namespace BaseClass
                 return;
             }
         }
-        //Ñ¿ÒÂ1¼¼ÄÜ£º±À»µÊÀ½çµÄ¸è¼§£¬¶ÔµĞÈË
-        //Ğ§¹û£º¹¥»÷Ê±ÓĞ30%¸ÅÂÊÂé±Ô¶Ô·½Ò»»ØºÏ
+        //èŠ½è¡£1æŠ€èƒ½ï¼šå´©åä¸–ç•Œçš„æ­Œå§¬ï¼Œå¯¹æ•Œäºº
+        //æ•ˆæœï¼šæ”»å‡»æ—¶æœ‰30%æ¦‚ç‡éº»ç—¹å¯¹æ–¹ä¸€å›åˆ
         public void EffectedByRaidenMei_Singer(Competitor User)
         {
             try
@@ -293,7 +293,7 @@ namespace BaseClass
                 if(ProbabilityFunction(30))
                 {
                     IsParalysis = true;
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜ±À»µÊÀ½çµÄ¸è¼§£¬Ê¹{( (ICompetitor) this ).GetName()}Âé±ÔÒ»»ØºÏ");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å´©åä¸–ç•Œçš„æ­Œå§¬ï¼Œä½¿{( (ICompetitor) this ).GetName()}éº»ç—¹ä¸€å›åˆ");
                 }
             }
             catch(UserMismatchingException)
@@ -301,7 +301,7 @@ namespace BaseClass
                 return;
             }
         }
-        //Çå³ıÑ£ÔÎ±ê¼Ç
+        //æ¸…é™¤çœ©æ™•æ ‡è®°
         public void ResetParalysis()
         {
             if(IsParalysis  == true)
@@ -309,8 +309,8 @@ namespace BaseClass
                 IsParalysis = false;
             }
         }
-        //Ñ¿ÒÂ2¼¼ÄÜ£ºÀ×µç¼ÒµÄÁúÅ®ÆÍ£¬¶ÔµĞÈË
-        //Ğ§¹û£ºÃ¿Á½»ØºÏ·¢¶¯Ò»´Î£¬Ôì³É5´Î3µãÎŞÊÓ·ÀÓùµÄÔªËØÉËº¦£¨¿É´¥·¢±À»µÊÀ½çµÄ¸è¼§Ò»´Î£©
+        //èŠ½è¡£2æŠ€èƒ½ï¼šé›·ç”µå®¶çš„é¾™å¥³ä»†ï¼Œå¯¹æ•Œäºº
+        //æ•ˆæœï¼šæ¯ä¸¤å›åˆå‘åŠ¨ä¸€æ¬¡ï¼Œé€ æˆ5æ¬¡3ç‚¹æ— è§†é˜²å¾¡çš„å…ƒç´ ä¼¤å®³ï¼ˆå¯è§¦å‘å´©åä¸–ç•Œçš„æ­Œå§¬ä¸€æ¬¡ï¼‰
         public void EffectedByRaidenMei_Dragon(Competitor User)
         {
             try
@@ -336,16 +336,16 @@ namespace BaseClass
                         }
                     }
                 }
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜÀ×µç¼ÒµÄÁúÅ®ÆÍ£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
-                Console.WriteLine($"{( (ICompetitor) this ).GetName()}Ê£ÏÂ{Health}µãÌåÁ¦");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½é›·ç”µå®¶çš„é¾™å¥³ä»†ï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
+                Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‰©ä¸‹{Health}ç‚¹ä½“åŠ›");
             }
             catch(UserMismatchingException)
             {
                 return;
             }
         }
-        //¶ÉÑ»1¼¼ÄÜ£º²»ÊÇÕë¶ÔÄã£¬¶Ô×Ô¼º
-        //Õ½¶·¿ªÊ¼Ê±£¬¶Ôç÷ÑÇÄÈÉËº¦ÌáÉı25%£¬¶ÔÆäËûÈËÔì³ÉµÄÉËº¦ÓĞ25%¸ÅÂÊÌáÉı25%
+        //æ¸¡é¸¦1æŠ€èƒ½ï¼šä¸æ˜¯é’ˆå¯¹ä½ ï¼Œå¯¹è‡ªå·±
+        //æˆ˜æ–—å¼€å§‹æ—¶ï¼Œå¯¹çªäºšå¨œä¼¤å®³æå‡25%ï¼Œå¯¹å…¶ä»–äººé€ æˆçš„ä¼¤å®³æœ‰25%æ¦‚ç‡æå‡25%
         public void EffectedByCorvusCorax_ToDefender(Competitor Defender)
         {
             try
@@ -357,14 +357,14 @@ namespace BaseClass
                 if(( (ICompetitor) Defender ).GetName() == "Kiana")
                 {
                     AttackPercentage += 25;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜ²»ÊÇÕë¶ÔÄã£¬ÌáÉı×Ô¼º¶Ôç÷ÑÇÄÈ25%ÉËº¦");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½ä¸æ˜¯é’ˆå¯¹ä½ ï¼Œæå‡è‡ªå·±å¯¹çªäºšå¨œ25%ä¼¤å®³");
                 }
                 else
                 {
                     if(ProbabilityFunction(25))
                     {
                         AttackPercentage += 25;
-                        Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜ²»ÊÇÕë¶ÔÄã£¬ÌáÉı×Ô¼º25%ÉËº¦");
+                        Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½ä¸æ˜¯é’ˆå¯¹ä½ ï¼Œæå‡è‡ªå·±25%ä¼¤å®³");
                     }
                 }
             }
@@ -373,8 +373,8 @@ namespace BaseClass
                 return;
             }
         }
-        //¶ÉÑ»2¼¼ÄÜ£º±ğÊûĞ¡µº£¬¶ÔµĞÈË
-        //Ã¿Èı¸ö»ØºÏ·¢¶¯Ò»´Î£¬¸øÓë¶Ô·½7´Î16µãÉËº¦
+        //æ¸¡é¸¦2æŠ€èƒ½ï¼šåˆ«å¢…å°å²›ï¼Œå¯¹æ•Œäºº
+        //æ¯ä¸‰ä¸ªå›åˆå‘åŠ¨ä¸€æ¬¡ï¼Œç»™ä¸å¯¹æ–¹7æ¬¡16ç‚¹ä¼¤å®³
         public void EffectedByCorvusCorax_Island(Competitor User)
         {
             try
@@ -405,16 +405,16 @@ namespace BaseClass
 
                     }
                 }
-                Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜ±ğÊûĞ¡µº¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
-                Console.WriteLine($"{( (ICompetitor) this ).GetName()}Ê£ÏÂ{Health}µãÌåÁ¦");
+                Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½åˆ«å¢…å°å²›å¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
+                Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‰©ä¸‹{Health}ç‚¹ä½“åŠ›");
             }
             catch(UserMismatchingException)
             {
                 return;
             }
         }
-        //²¼ÂåÄİæ«1¼¼ÄÜ£ºÌìÊ¹ÖØ¹¹£¬¶ÔµĞÈË
-        //¹¥»÷ºó25%¸ÅÂÊ·¢Éä×êÍ·£¬Ôì³É4´Î12µãÉËº¦
+        //å¸ƒæ´›å¦®å¨…1æŠ€èƒ½ï¼šå¤©ä½¿é‡æ„ï¼Œå¯¹æ•Œäºº
+        //æ”»å‡»å25%æ¦‚ç‡å‘å°„é’»å¤´ï¼Œé€ æˆ4æ¬¡12ç‚¹ä¼¤å®³
         public void EffectedByBronya_Cyberangel(Competitor User)
         {
             try
@@ -443,8 +443,8 @@ namespace BaseClass
                             }
                         }
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜÌìÊ¹ÖØ¹¹£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}Ê£ÏÂ{Health}µãÌåÁ¦");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å¤©ä½¿é‡æ„ï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‰©ä¸‹{Health}ç‚¹ä½“åŠ›");
                 }
             }
             catch(UserMismatchingException)
@@ -452,8 +452,8 @@ namespace BaseClass
                 return;
             }
         }
-        //²¼ÂåÄİæ«2¼¼ÄÜ£ºÄ¦ÍĞ°İ¿ÍßÕ£¡£¬¶ÔµĞÈË
-        //Ã¿Èı¸ö»ØºÏ·¢¶¯Ò»´Î£¬Ôì³É1~100µãÎŞÊÓ·ÀÓùµÄÔªËØÉËº¦
+        //å¸ƒæ´›å¦®å¨…2æŠ€èƒ½ï¼šæ‘©æ‰˜æ‹œå®¢å“’ï¼ï¼Œå¯¹æ•Œäºº
+        //æ¯ä¸‰ä¸ªå›åˆå‘åŠ¨ä¸€æ¬¡ï¼Œé€ æˆ1~100ç‚¹æ— è§†é˜²å¾¡çš„å…ƒç´ ä¼¤å®³
         public void EffectedByBronya_Mortar(Competitor User)
         {
             try
@@ -475,11 +475,11 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜÄ¦ÍĞ°İ¿ÍßÕ£¡£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½æ‘©æ‰˜æ‹œå®¢å“’ï¼ï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
                 }
                 else
                 {
-                    Console.WriteLine($"{((ICompetitor)User).GetName()}·¢¶¯¼¼ÄÜÄ¦ÍĞ°İ¿ÍßÕ£¡Î´ÃüÖĞ");
+                    Console.WriteLine($"{((ICompetitor)User).GetName()}å‘åŠ¨æŠ€èƒ½æ‘©æ‰˜æ‹œå®¢å“’ï¼æœªå‘½ä¸­");
                 }
             }
             catch(UserMismatchingException)
@@ -487,8 +487,8 @@ namespace BaseClass
                 return;
             }
         }
-        //¿¨Á«&°ËÖØÓ£1¼¼ÄÜ£º°ËÖØÓ£µÄ·¹ÍÅ£¬¶Ô×Ô¼º
-        //Ã¿¸ö»ØºÏ¹¥»÷Ç°ÓĞ30%¸ÅÂÊ»Ø¸´25µãÉúÃü
+        //å¡è²&å…«é‡æ¨±1æŠ€èƒ½ï¼šå…«é‡æ¨±çš„é¥­å›¢ï¼Œå¯¹è‡ªå·±
+        //æ¯ä¸ªå›åˆæ”»å‡»å‰æœ‰30%æ¦‚ç‡å›å¤25ç‚¹ç”Ÿå‘½
         public void EffectedBySakura()
         {
             try
@@ -501,7 +501,7 @@ namespace BaseClass
                 {
                     int PreviousHealth = Health;
                     Health = ( 100 - Health ) >= 25 ? Health + 25 : 100;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜ°ËÖØÓ£µÄ·¹ÍÅ£¬»Ø¸´×Ô¼º{Health-PreviousHealth}µãÑªÁ¿");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½å…«é‡æ¨±çš„é¥­å›¢ï¼Œå›å¤è‡ªå·±{Health-PreviousHealth}ç‚¹è¡€é‡");
                 }
             }
             catch(UserMismatchingException)
@@ -509,8 +509,8 @@ namespace BaseClass
                 return;
             }
         }
-        //¿¨Á«&°ËÖØÓ£2¼¼ÄÜ£º¿¨Á«µÄ·¹ÍÅ£¬¶ÔµĞÈË
-        //Ã¿Á½¸ö»ØºÏ·¢¶¯Ò»´Î£¬¶ÔµĞÈËÔì³É25µãÔªËØÉËº¦
+        //å¡è²&å…«é‡æ¨±2æŠ€èƒ½ï¼šå¡è²çš„é¥­å›¢ï¼Œå¯¹æ•Œäºº
+        //æ¯ä¸¤ä¸ªå›åˆå‘åŠ¨ä¸€æ¬¡ï¼Œå¯¹æ•Œäººé€ æˆ25ç‚¹å…ƒç´ ä¼¤å®³
         public void EffectedByKallen(Competitor User)
         {
             try
@@ -531,11 +531,11 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜ¿¨Á«µÄ·¹ÍÅ£¬¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å¡è²çš„é¥­å›¢ï¼Œå¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
                 }
                 else
                 {
-                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}·¢¶¯¼¼ÄÜ¿¨Á«µÄ·¹ÍÅ£¬Î´ÃüÖĞ");
+                    Console.WriteLine($"{( (ICompetitor) User ).GetName()}å‘åŠ¨æŠ€èƒ½å¡è²çš„é¥­å›¢ï¼Œæœªå‘½ä¸­");
                 }
             }
             catch(UserMismatchingException)
@@ -543,10 +543,10 @@ namespace BaseClass
                 return;
             }
         }
-        //Ï£¶ù¼¼ÄÜ£ºÎÒ»»ÎÒ×Ô¼º£¨°İÍĞÁË£¬ÁíÒ»¸öÎÒ/È¥°É£¬Ï£¶ù£¬È¥ÊØ»¤ÎÒÃÇµÄÔ¼¶¨£©
-        //Ã¿¸ö»ØºÏ¹¥»÷Ç°½×¶ÎÇĞ»»Ò»´Î×´Ì¬
-        //ºÚÏ££¬¹¥»÷Ìá¸ß10µã£¬·ÀÓù½µµÍ5µã
-        //°×Ï££¬ÇĞ»»Ê±»Ø¸´1~15µãÉúÃü£¬¹¥»÷¼õÉÙ10µã£¬·ÀÓùÔö¼Ó5µã
+        //å¸Œå„¿æŠ€èƒ½ï¼šæˆ‘æ¢æˆ‘è‡ªå·±ï¼ˆæ‹œæ‰˜äº†ï¼Œå¦ä¸€ä¸ªæˆ‘/å»å§ï¼Œå¸Œå„¿ï¼Œå»å®ˆæŠ¤æˆ‘ä»¬çš„çº¦å®šï¼‰
+        //æ¯ä¸ªå›åˆæ”»å‡»å‰é˜¶æ®µåˆ‡æ¢ä¸€æ¬¡çŠ¶æ€
+        //é»‘å¸Œï¼Œæ”»å‡»æé«˜10ç‚¹ï¼Œé˜²å¾¡é™ä½5ç‚¹
+        //ç™½å¸Œï¼Œåˆ‡æ¢æ—¶å›å¤1~15ç‚¹ç”Ÿå‘½ï¼Œæ”»å‡»å‡å°‘10ç‚¹ï¼Œé˜²å¾¡å¢åŠ 5ç‚¹
         public void EffectedBySeeleVollerei()
         {
             try
@@ -555,7 +555,7 @@ namespace BaseClass
                 {
                     throw new UserMismatchingException(this);
                 }
-                //ºÚ±ä°×
+                //é»‘å˜ç™½
                 if(( (SeeleVollerei) this ).Color == SeeleVollerei.SeeleVollereiColor.Black)
                 {
                     int PreviousHealth = Health;
@@ -566,9 +566,9 @@ namespace BaseClass
                     Health = Health + RandomResult >= 100 ? 100 : Health + RandomResult;
                     Attack = Attack >= 10 ? Attack - 10 : 0;
                     Defense += 5;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜÎÒ»»ÎÒ×Ô¼º£¬¡°È¥°É£¬Ï£¶ù£¬È¥ÊØ»¤ÎÒÃÇµÄÔ¼¶¨¡±£¬½µµÍ{PreviousAttack - Attack}µã¹¥»÷£¬ÌáÉı{Health - PreviousHealth}µãÉúÃü£¬ÌáÉı{Defense - PreviousDefense}µã·ÀÓù");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½æˆ‘æ¢æˆ‘è‡ªå·±ï¼Œâ€œå»å§ï¼Œå¸Œå„¿ï¼Œå»å®ˆæŠ¤æˆ‘ä»¬çš„çº¦å®šâ€ï¼Œé™ä½{PreviousAttack - Attack}ç‚¹æ”»å‡»ï¼Œæå‡{Health - PreviousHealth}ç‚¹ç”Ÿå‘½ï¼Œæå‡{Defense - PreviousDefense}ç‚¹é˜²å¾¡");
                 }
-                //°×±äºÚ
+                //ç™½å˜é»‘
                 else if(( (SeeleVollerei) this ).Color == SeeleVollerei.SeeleVollereiColor.White)
                 {
                     int PreviousAttack = Attack;
@@ -576,7 +576,7 @@ namespace BaseClass
                     ( (SeeleVollerei) this ).Color = SeeleVollerei.SeeleVollereiColor.Black;
                     Attack += 10;
                     Defense = Defense >= 5 ? Defense - 5 : 0;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜÎÒ»»ÎÒ×Ô¼º£¬¡°°İÍĞÁË£¬ÁíÒ»¸öÎÒ¡±£¬ÌáÉı{Attack - PreviousAttack}µã¹¥»÷£¬½µµÍ{PreviousDefense - Defense}µã·ÀÓù");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½æˆ‘æ¢æˆ‘è‡ªå·±ï¼Œâ€œæ‹œæ‰˜äº†ï¼Œå¦ä¸€ä¸ªæˆ‘â€ï¼Œæå‡{Attack - PreviousAttack}ç‚¹æ”»å‡»ï¼Œé™ä½{PreviousDefense - Defense}ç‚¹é˜²å¾¡");
                 }
             }
             catch(UserMismatchingException)
@@ -584,8 +584,8 @@ namespace BaseClass
                 return;
             }
         }
-        //¼§×Ó1¼¼ÄÜ£ºÕæ°®²»ËÀ£¬¶Ô×Ô¼º
-        //¶Ô·Çµ¥ÈË¶ÓÎéÔì³ÉÉËº¦ÌáÉı100%
+        //å§¬å­1æŠ€èƒ½ï¼šçœŸçˆ±ä¸æ­»ï¼Œå¯¹è‡ªå·±
+        //å¯¹éå•äººé˜Ÿä¼é€ æˆä¼¤å®³æå‡100%
         public void EffectedByHimeko_Love(Competitor Defender)
         {
             try
@@ -597,7 +597,7 @@ namespace BaseClass
                 if(( (ICompetitor) Defender ).GetName() == "KallenAndSakura")
                 {
                     AttackPercentage += 100;
-                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜÕæ°®²»ËÀ£¬ÌáÉı100%ÉËº¦");
+                    Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½çœŸçˆ±ä¸æ­»ï¼Œæå‡100%ä¼¤å®³");
                 }
             }
             catch(UserMismatchingException)
@@ -605,8 +605,8 @@ namespace BaseClass
                 return;
             }
         }
-        //¼§×Ó2¼¼ÄÜ£º¸É±­£¬ÅóÓÑ£¬¶Ô×Ô¼º
-        //Ã¿2»ØºÏ·¢¶¯Ò»´Î£¬¹¥»÷Ç°Ê¹×Ô¼º¹¥»÷Á¦·­±¶£¬»ù´¡ÃüÖĞÂÊ½µµÍ35%£¬¿Éµş¼Ó
+        //å§¬å­2æŠ€èƒ½ï¼šå¹²æ¯ï¼Œæœ‹å‹ï¼Œå¯¹è‡ªå·±
+        //æ¯2å›åˆå‘åŠ¨ä¸€æ¬¡ï¼Œæ”»å‡»å‰ä½¿è‡ªå·±æ”»å‡»åŠ›ç¿»å€ï¼ŒåŸºç¡€å‘½ä¸­ç‡é™ä½35%ï¼Œå¯å åŠ 
         public void EffectedByHimeko_Alcohol()
         {
             try
@@ -619,7 +619,7 @@ namespace BaseClass
                 int PreviousHitRate = HitRate;
                 Attack *= 2;
                 HitRate = HitRate >= 35 ? HitRate - 35 : 0;
-                Console.WriteLine($"{( (ICompetitor) this ).GetName()}·¢¶¯¼¼ÄÜ¸É±­£¬ÅóÓÑ ÌáÉı{Attack - PreviousAttack}µã¹¥»÷Á¦£¬½µµÍ{PreviousHitRate - HitRate}%ÃüÖĞÂÊ");
+                Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‘åŠ¨æŠ€èƒ½å¹²æ¯ï¼Œæœ‹å‹ æå‡{Attack - PreviousAttack}ç‚¹æ”»å‡»åŠ›ï¼Œé™ä½{PreviousHitRate - HitRate}%å‘½ä¸­ç‡");
             }
             catch(UserMismatchingException)
             {
@@ -627,21 +627,21 @@ namespace BaseClass
             }
         }
 
-        //ÆÕÍ¨¹¥»÷
+        //æ™®é€šæ”»å‡»
         public void GetAttacked(Competitor Attacker)
         {
-            //ÆÕÍ¨¹¥»÷ÃüÖĞ
+            //æ™®é€šæ”»å‡»å‘½ä¸­
             if(ProbabilityFunction(Attacker.HitRate))
             {
                 int PreviousHealth = Health;
-                //ÎïÀí¹¥»÷
+                //ç‰©ç†æ”»å‡»
                 if(Attacker.IsPhysical == true)
                 {
                     int AttackValue = Attacker.Attack - Defense;
                     AttackValue = AttackValue * Attacker.AttackPercentage / 100;
                     if(AttackValue < 0)
                     {
-                        Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}ÆÕÍ¨¹¥»÷Î´¶Ô{( (ICompetitor) this ).GetName()}Ôì³ÉÉËº¦");
+                        Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}æ™®é€šæ”»å‡»æœªå¯¹{( (ICompetitor) this ).GetName()}é€ æˆä¼¤å®³");
                         return;
                     }
                     else
@@ -654,10 +654,10 @@ namespace BaseClass
                         {
                             Health = 0;
                         }
-                        Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}ÆÕÍ¨¹¥»÷¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
+                        Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}æ™®é€šæ”»å‡»å¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
                     }
                 }
-                //ÔªËØ¹¥»÷
+                //å…ƒç´ æ”»å‡»
                 else
                 {
                     int AttackValue = Attacker.Attack;
@@ -670,17 +670,17 @@ namespace BaseClass
                     {
                         Health = 0;
                     }
-                    Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}ÆÕÍ¨¹¥»÷¶Ô{( (ICompetitor) this ).GetName()}Ôì³É{PreviousHealth - Health}µãÉËº¦");
+                    Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}æ™®é€šæ”»å‡»å¯¹{( (ICompetitor) this ).GetName()}é€ æˆ{PreviousHealth - Health}ç‚¹ä¼¤å®³");
                 }
-                Console.WriteLine($"{( (ICompetitor) this ).GetName()}Ê£ÏÂ{Health}µãÉúÃüÖµ");
+                Console.WriteLine($"{( (ICompetitor) this ).GetName()}å‰©ä¸‹{Health}ç‚¹ç”Ÿå‘½å€¼");
             }
-            //ÆÕÍ¨¹¥»÷Î´ÃüÖĞ
+            //æ™®é€šæ”»å‡»æœªå‘½ä¸­
             else
             {
-                Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}ÆÕÍ¨¹¥»÷Î´ÃüÖĞ");
+                Console.WriteLine($"{( (ICompetitor) Attacker ).GetName()}æ™®é€šæ”»å‡»æœªå‘½ä¸­");
             }
         }
-        //²âÊÔÓÃ·½·¨£¬Êä³öÈËÎïÊµÊ±Êı¾İ
+        //æµ‹è¯•ç”¨æ–¹æ³•ï¼Œè¾“å‡ºäººç‰©å®æ—¶æ•°æ®
         sealed public override string ToString()
         {
             string Result = null;
@@ -694,7 +694,7 @@ namespace BaseClass
             Result += $"IsVertigo:{IsVertigo}\n";
             Result += $"IsPhysical:{IsPhysical}\n";
             Result += $"IsParalysis:{IsParalysis}\n";
-            Result += $"IsChramed:{IsCharmed}\n";
+            Result += $"IsCharmed:{IsCharmed}\n";
             Result += $"CharmedTime:{CharmedTime}\n";
             Result += $"HasBeenCharmed:{HasBeenCharmed}\n";
             Result += "\n";
