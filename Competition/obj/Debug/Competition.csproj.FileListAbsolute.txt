@@ -5,3 +5,10 @@ C:\Users\StoneBear\source\repos\Competition\bin\Debug\Competition.exe
 C:\Users\StoneBear\source\repos\Competition\bin\Debug\Competition.pdb
 C:\Users\StoneBear\source\repos\Competition\obj\Debug\Competition.exe
 C:\Users\StoneBear\source\repos\Competition\obj\Debug\Competition.pdb
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\bin\Debug\Competition.exe.config
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\bin\Debug\Competition.exe
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\bin\Debug\Competition.pdb
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\obj\Debug\Competition.csprojAssemblyReference.cache
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\obj\Debug\Competition.csproj.CoreCompileInputs.cache
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\obj\Debug\Competition.exe
+C:\Users\StoneBear\Source\Repos\Honkai-Impact-3-Competition\Competition\obj\Debug\Competition.pdb
