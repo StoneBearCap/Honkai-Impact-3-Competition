@@ -1,7 +1,0 @@
-C:\Users\StoneBear\source\repos\Competition\bin\Release\Competition.exe.config
-C:\Users\StoneBear\source\repos\Competition\bin\Release\Competition.exe
-C:\Users\StoneBear\source\repos\Competition\bin\Release\Competition.pdb
-C:\Users\StoneBear\source\repos\Competition\obj\Release\Competition.csproj.CoreCompileInputs.cache
-C:\Users\StoneBear\source\repos\Competition\obj\Release\Competition.exe
-C:\Users\StoneBear\source\repos\Competition\obj\Release\Competition.pdb
-C:\Users\StoneBear\source\repos\Competition\obj\Release\Competition.csprojAssemblyReference.cache
