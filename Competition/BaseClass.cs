@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Competition.BaseClass
 {
-    public class Competitor
+    public class Competitor : ICompetitor
     {
         //概率匿名委托
         readonly Func<int, bool> ProbabilityFunction = (int ProbabilityValue) =>
@@ -35,12 +35,12 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "RitaRossweisse")
+                if (User.GetName() != "RitaRossweisse")
                 {
                     throw new UserMismatchingException(User);
                 }
                 int PreviousAttack = Attack;
-                if(Attack > 4)
+                if (Attack > 4)
                 {
                     Attack -= 4;
                 }
@@ -49,9 +49,9 @@ namespace Competition.BaseClass
                     Attack = 0;
                 }
                 Health += 3;
-                return ( $"{User.GetName()}发动技能女仆的温柔清理，降低{this.GetName()}{PreviousAttack - Attack}点攻击力\n" );
+                return ($"{User.GetName()}发动技能女仆的温柔清理，降低{this.GetName()}{PreviousAttack - Attack}点攻击力\n");
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -62,20 +62,20 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "RitaRossweisse")
+                if (User.GetName() != "RitaRossweisse")
                 {
                     throw new UserMismatchingException(User);
                 }
                 IsCharmed = true;
                 CharmedTime = 2;
-                if(HasBeenCharmed == false)
+                if (HasBeenCharmed == false)
                 {
                     AttackPercentage = AttackPercentage * 40 / 100;
                 }
                 HasBeenCharmed = true;
-                return ( $"{User.GetName()}对{this.GetName()}使用魅惑技能，使其进入魅惑状态两回合（期间不能使用技能），永久降低60%伤害\n" );
+                return ($"{User.GetName()}对{this.GetName()}使用魅惑技能，使其进入魅惑状态两回合（期间不能使用技能），永久降低60%伤害\n");
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -86,16 +86,16 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "FuHua")
+                if (User.GetName() != "FuHua")
                 {
                     throw new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(User.HitRate))
+                if (ProbabilityFunction(User.HitRate))
                 {
                     int AttackValue = 18 * User.AttackPercentage / 100;
                     int PreviousHealth = Health;
                     int PreviousHitRate = HitRate;
-                    if(Health >= AttackValue)
+                    if (Health >= AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -103,7 +103,7 @@ namespace Competition.BaseClass
                     {
                         Health = 0;
                     }
-                    if(HitRate >= 25)
+                    if (HitRate >= 25)
                     {
                         HitRate -= 25;
                     }
@@ -111,15 +111,15 @@ namespace Competition.BaseClass
                     {
                         HitRate = 0;
                     }
-                    return ( $"{User.GetName()}发动技能形之笔墨，对{this.GetName()}造成{PreviousHealth - Health}点伤害，降低{PreviousHitRate - HitRate}%命中率\n" );
+                    return ($"{User.GetName()}发动技能形之笔墨，对{this.GetName()}造成{PreviousHealth - Health}点伤害，降低{PreviousHitRate - HitRate}%命中率\n");
 
                 }
                 else
                 {
-                    return ( $"{User.GetName()}发动技能形之笔墨未命中\n" );
+                    return ($"{User.GetName()}发动技能形之笔墨未命中\n");
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -130,14 +130,14 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "TheresaApocalypse")
+                if (User.GetName() != "TheresaApocalypse")
                 {
                     throw new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(30))
+                if (ProbabilityFunction(30))
                 {
                     int PreviousDefense = Defense;
-                    if(Defense > 5)
+                    if (Defense > 5)
                     {
                         Defense -= 5;
                     }
@@ -145,14 +145,14 @@ namespace Competition.BaseClass
                     {
                         Defense = 0;
                     }
-                    return ( $"{User.GetName()}发动技能血犹大第一可爱，降低{this.GetName()}{PreviousDefense - Defense}点防御\n" );
+                    return ($"{User.GetName()}发动技能血犹大第一可爱，降低{this.GetName()}{PreviousDefense - Defense}点防御\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -163,18 +163,18 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "TheresaApocalypse")
+                if (User.GetName() != "TheresaApocalypse")
                 {
                     throw new UserMismatchingException(User);
                 }
                 int PreviousHealth = Health;
-                for(int i = 1; i <= 5; i++)
+                for (int i = 1; i <= 5; i++)
                 {
-                    if(ProbabilityFunction(User.HitRate))
+                    if (ProbabilityFunction(User.HitRate))
                     {
                         int AttackValue = 16 - Defense;
                         AttackValue = AttackValue * User.AttackPercentage / 100;
-                        if(Health > AttackValue)
+                        if (Health > AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -189,9 +189,9 @@ namespace Competition.BaseClass
 
                     }
                 }
-                return ( $"{User.GetName()}发动技能在线踢人，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" );
+                return ($"{User.GetName()}发动技能在线踢人，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n");
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -202,16 +202,16 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "Kiana")
+                if (User.GetName() != "Kiana")
                 {
                     throw new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(User.HitRate))
+                if (ProbabilityFunction(User.HitRate))
                 {
                     int PreviousHealth = Health;
                     int AttackValue = User.Attack + Defense * 2 - Defense;
                     AttackValue = AttackValue * User.AttackPercentage / 100;
-                    if(Health >= AttackValue)
+                    if (Health >= AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -219,15 +219,15 @@ namespace Competition.BaseClass
                     {
                         Health = 0;
                     }
-                    return ( $"{User.GetName()}发动技能吃我一矛！，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" )
-                    + ( $"{this.GetName()}剩下{Health}点体力\n" );
+                    return ($"{User.GetName()}发动技能吃我一矛！，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n")
+                    + ($"{this.GetName()}剩下{Health}点体力\n");
                 }
                 else
                 {
-                    return ( $"{User.GetName()}发动技能吃我一矛！，未命中\n" );
+                    return ($"{User.GetName()}发动技能吃我一矛！，未命中\n");
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -238,21 +238,21 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(this.GetName() != "Kiana")
+                if (this.GetName() != "Kiana")
                 {
                     throw new UserMismatchingException(this);
                 }
-                if(ProbabilityFunction(35))
+                if (ProbabilityFunction(35))
                 {
                     IsVertigo = true;
-                    return ( $"{this.GetName()}发动技能音浪~太强~，使自己眩晕一回合\n" );
+                    return ($"{this.GetName()}发动技能音浪~太强~，使自己眩晕一回合\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -263,21 +263,21 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "RaidenMei")
+                if (User.GetName() != "RaidenMei")
                 {
                     throw new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(30))
+                if (ProbabilityFunction(30))
                 {
                     IsParalysis = true;
-                    return ( $"{User.GetName()}发动技能崩坏世界的歌姬，使{this.GetName()}麻痹一回合\n" );
+                    return ($"{User.GetName()}发动技能崩坏世界的歌姬，使{this.GetName()}麻痹一回合\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -288,17 +288,17 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "RaidenMei")
+                if (User.GetName() != "RaidenMei")
                 {
                     throw new UserMismatchingException(User);
                 }
                 int PreviousHealth = Health;
-                for(int i = 1; i <= 5; i++)
+                for (int i = 1; i <= 5; i++)
                 {
-                    if(ProbabilityFunction(User.HitRate))
+                    if (ProbabilityFunction(User.HitRate))
                     {
                         int AttackValue = 3 * User.AttackPercentage / 100;
-                        if(Health >= AttackValue)
+                        if (Health >= AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -309,10 +309,10 @@ namespace Competition.BaseClass
                         }
                     }
                 }
-                return ( $"{User.GetName()}发动技能雷电家的龙女仆，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" )
-                + ( $"{this.GetName()}剩下{Health}点体力\n" );
+                return ($"{User.GetName()}发动技能雷电家的龙女仆，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n")
+                + ($"{this.GetName()}剩下{Health}点体力\n");
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -323,21 +323,21 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(this.GetName() != "CorvusCorax")
+                if (this.GetName() != "CorvusCorax")
                 {
                     throw new UserMismatchingException(this);
                 }
-                if(Defender.GetName() == "Kiana")
+                if (Defender.GetName() == "Kiana")
                 {
                     AttackPercentage += 25;
-                    return ( $"{this.GetName()}发动技能不是针对你，提升自己对琪亚娜25%伤害\n" );
+                    return ($"{this.GetName()}发动技能不是针对你，提升自己对琪亚娜25%伤害\n");
                 }
                 else
                 {
-                    if(ProbabilityFunction(25))
+                    if (ProbabilityFunction(25))
                     {
                         AttackPercentage += 25;
-                        return ( $"{this.GetName()}发动技能不是针对你，提升自己25%伤害\n" );
+                        return ($"{this.GetName()}发动技能不是针对你，提升自己25%伤害\n");
                     }
                     else
                     {
@@ -345,7 +345,7 @@ namespace Competition.BaseClass
                     }
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -356,18 +356,18 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "CorvusCorax")
+                if (User.GetName() != "CorvusCorax")
                 {
                     throw new UserMismatchingException(User);
                 }
                 int PreviousHealth = Health;
-                for(int i = 1; i <= 7; i++)
+                for (int i = 1; i <= 7; i++)
                 {
-                    if(ProbabilityFunction(User.HitRate))
+                    if (ProbabilityFunction(User.HitRate))
                     {
                         int AttackValue = 16 - Defense;
                         AttackValue = AttackValue * User.AttackPercentage / 100;
-                        if(Health > AttackValue)
+                        if (Health > AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -382,10 +382,10 @@ namespace Competition.BaseClass
 
                     }
                 }
-                return ( $"{User.GetName()}发动技能别墅小岛对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" )
-                + ( $"{this.GetName()}剩下{Health}点体力\n" );
+                return ($"{User.GetName()}发动技能别墅小岛对{this.GetName()}造成{PreviousHealth - Health}点伤害\n")
+                + ($"{this.GetName()}剩下{Health}点体力\n");
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -396,20 +396,20 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "Bronya")
+                if (User.GetName() != "Bronya")
                 {
                     throw new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(25))
+                if (ProbabilityFunction(25))
                 {
                     int PreviousHealth = Health;
-                    for(int i = 1; i <= 4; i++)
+                    for (int i = 1; i <= 4; i++)
                     {
-                        if(ProbabilityFunction(User.HitRate))
+                        if (ProbabilityFunction(User.HitRate))
                         {
                             int AttackValue = 12 - Defense;
                             AttackValue = AttackValue * User.AttackPercentage / 100;
-                            if(Health >= AttackValue)
+                            if (Health >= AttackValue)
                             {
                                 Health -= AttackValue;
                             }
@@ -420,15 +420,15 @@ namespace Competition.BaseClass
                             }
                         }
                     }
-                    return ( $"{User.GetName()}发动技能天使重构，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" )
-                    + ( $"{this.GetName()}剩下{Health}点体力\n" );
+                    return ($"{User.GetName()}发动技能天使重构，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n")
+                    + ($"{this.GetName()}剩下{Health}点体力\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -439,16 +439,16 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "Bronya")
+                if (User.GetName() != "Bronya")
                 {
                     var b = new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(User.HitRate))
+                if (ProbabilityFunction(User.HitRate))
                 {
                     int AttackValue = new Random().Next(1, 100);
                     AttackValue = AttackValue * User.AttackPercentage / 100;
                     int PreviousHealth = Health;
-                    if(Health > AttackValue)
+                    if (Health > AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -456,14 +456,14 @@ namespace Competition.BaseClass
                     {
                         Health = 0;
                     }
-                    return ( $"{User.GetName()}发动技能摩托拜客哒！，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" );
+                    return ($"{User.GetName()}发动技能摩托拜客哒！，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n");
                 }
                 else
                 {
-                    return ( $"{User.GetName()}发动技能摩托拜客哒！未命中\n" );
+                    return ($"{User.GetName()}发动技能摩托拜客哒！未命中\n");
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -474,22 +474,22 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(this.GetName() != "KallenAndSakura")
+                if (this.GetName() != "KallenAndSakura")
                 {
                     throw new UserMismatchingException(this);
                 }
-                if(ProbabilityFunction(30))
+                if (ProbabilityFunction(30))
                 {
                     int PreviousHealth = Health;
-                    Health = ( 100 - Health ) >= 25 ? Health + 25 : 100;
-                    return ( $"{this.GetName()}发动技能八重樱的饭团，回复自己{Health - PreviousHealth}点血量\n" );
+                    Health = (100 - Health) >= 25 ? Health + 25 : 100;
+                    return ($"{this.GetName()}发动技能八重樱的饭团，回复自己{Health - PreviousHealth}点血量\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -500,15 +500,15 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(User.GetName() != "KallenAndSakura")
+                if (User.GetName() != "KallenAndSakura")
                 {
                     throw new UserMismatchingException(User);
                 }
-                if(ProbabilityFunction(User.HitRate))
+                if (ProbabilityFunction(User.HitRate))
                 {
                     int PreviousHealth = Health;
                     int AttackValue = 25 * User.AttackPercentage / 100;
-                    if(Health > AttackValue)
+                    if (Health > AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -516,14 +516,14 @@ namespace Competition.BaseClass
                     {
                         Health = 0;
                     }
-                    return ( $"{User.GetName()}发动技能卡莲的饭团，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" );
+                    return ($"{User.GetName()}发动技能卡莲的饭团，对{this.GetName()}造成{PreviousHealth - Health}点伤害\n");
                 }
                 else
                 {
-                    return ( $"{User.GetName()}发动技能卡莲的饭团，未命中\n" );
+                    return ($"{User.GetName()}发动技能卡莲的饭团，未命中\n");
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -536,39 +536,39 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(this.GetName() != "SeeleVollerei")
+                if (this.GetName() != "SeeleVollerei")
                 {
                     throw new UserMismatchingException(this);
                 }
                 //黑变白
-                if(( (ISeeleVollerei) this ).Color == ISeeleVollerei.SeeleVollereiColor.Black)
+                if (((ISeeleVollerei)this).Color == ISeeleVollerei.SeeleVollereiColor.Black)
                 {
                     int PreviousHealth = Health;
                     int PreviousAttack = Attack;
                     int PreviousDefense = Defense;
-                    ( (ISeeleVollerei) this ).Color = ISeeleVollerei.SeeleVollereiColor.White;
+                    ((ISeeleVollerei)this).Color = ISeeleVollerei.SeeleVollereiColor.White;
                     int RandomResult = new Random().Next(1, 15);
                     Health = Health + RandomResult >= 100 ? 100 : Health + RandomResult;
                     Attack = Attack >= 10 ? Attack - 10 : 0;
                     Defense += 5;
-                    return ( $"{this.GetName()}发动技能我换我自己，“去吧，希儿，去守护我们的约定”，降低{PreviousAttack - Attack}点攻击，提升{Health - PreviousHealth}点生命，提升{Defense - PreviousDefense}点防御\n" );
+                    return ($"{this.GetName()}发动技能我换我自己，“去吧，希儿，去守护我们的约定”，降低{PreviousAttack - Attack}点攻击，提升{Health - PreviousHealth}点生命，提升{Defense - PreviousDefense}点防御\n");
                 }
                 //白变黑
-                else if(( (ISeeleVollerei) this ).Color == ISeeleVollerei.SeeleVollereiColor.White)
+                else if (((ISeeleVollerei)this).Color == ISeeleVollerei.SeeleVollereiColor.White)
                 {
                     int PreviousAttack = Attack;
                     int PreviousDefense = Defense;
-                    ( (ISeeleVollerei) this ).Color = ISeeleVollerei.SeeleVollereiColor.Black;
+                    ((ISeeleVollerei)this).Color = ISeeleVollerei.SeeleVollereiColor.Black;
                     Attack += 10;
                     Defense = Defense >= 5 ? Defense - 5 : 0;
-                    return ( $"{this.GetName()}发动技能我换我自己，“拜托了，另一个我”，提升{Attack - PreviousAttack}点攻击，降低{PreviousDefense - Defense}点防御\n" );
+                    return ($"{this.GetName()}发动技能我换我自己，“拜托了，另一个我”，提升{Attack - PreviousAttack}点攻击，降低{PreviousDefense - Defense}点防御\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -579,21 +579,21 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(this.GetName() != "Himeko")
+                if (this.GetName() != "Himeko")
                 {
                     throw new UserMismatchingException(this);
                 }
-                if(Defender.GetName() == "KallenAndSakura")
+                if (Defender.GetName() == "KallenAndSakura")
                 {
                     AttackPercentage += 100;
-                    return ( $"{this.GetName()}发动技能真爱不死，提升100%伤害\n" );
+                    return ($"{this.GetName()}发动技能真爱不死，提升100%伤害\n");
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -604,7 +604,7 @@ namespace Competition.BaseClass
         {
             try
             {
-                if(this.GetName() != "Himeko")
+                if (this.GetName() != "Himeko")
                 {
                     throw new UserMismatchingException(this);
                 }
@@ -612,9 +612,9 @@ namespace Competition.BaseClass
                 int PreviousHitRate = HitRate;
                 Attack *= 2;
                 HitRate = HitRate >= 35 ? HitRate - 35 : 0;
-                return ( $"{this.GetName()}发动技能干杯，朋友 提升{Attack - PreviousAttack}点攻击力，降低{PreviousHitRate - HitRate}%命中率\n" );
+                return ($"{this.GetName()}发动技能干杯，朋友 提升{Attack - PreviousAttack}点攻击力，降低{PreviousHitRate - HitRate}%命中率\n");
             }
-            catch(UserMismatchingException)
+            catch (UserMismatchingException)
             {
                 return null;
             }
@@ -624,22 +624,22 @@ namespace Competition.BaseClass
         public string GetAttacked(Competitor Attacker)
         {
             //普通攻击命中
-            if(ProbabilityFunction(Attacker.HitRate))
+            if (ProbabilityFunction(Attacker.HitRate))
             {
                 int PreviousHealth = Health;
                 string Result = null;
                 //物理攻击
-                if(Attacker.IsPhysical == true)
+                if (Attacker.IsPhysical == true)
                 {
                     int AttackValue = Attacker.Attack - Defense;
                     AttackValue = AttackValue * Attacker.AttackPercentage / 100;
-                    if(AttackValue < 0)
+                    if (AttackValue < 0)
                     {
-                        Result += ( $"{Attacker.GetName()}普通攻击未对{this.GetName()}造成伤害\n" );
+                        Result += ($"{Attacker.GetName()}普通攻击未对{this.GetName()}造成伤害\n");
                     }
                     else
                     {
-                        if(Health >= AttackValue)
+                        if (Health >= AttackValue)
                         {
                             Health -= AttackValue;
                         }
@@ -647,7 +647,7 @@ namespace Competition.BaseClass
                         {
                             Health = 0;
                         }
-                        Result += ( $"{Attacker.GetName()}普通攻击对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" );
+                        Result += ($"{Attacker.GetName()}普通攻击对{this.GetName()}造成{PreviousHealth - Health}点伤害\n");
                     }
                 }
                 //元素攻击
@@ -655,7 +655,7 @@ namespace Competition.BaseClass
                 {
                     int AttackValue = Attacker.Attack;
                     AttackValue = AttackValue * Attacker.AttackPercentage / 100;
-                    if(Health >= AttackValue)
+                    if (Health >= AttackValue)
                     {
                         Health -= AttackValue;
                     }
@@ -663,15 +663,15 @@ namespace Competition.BaseClass
                     {
                         Health = 0;
                     }
-                    Result += ( $"{Attacker.GetName()}普通攻击对{this.GetName()}造成{PreviousHealth - Health}点伤害\n" );
+                    Result += ($"{Attacker.GetName()}普通攻击对{this.GetName()}造成{PreviousHealth - Health}点伤害\n");
                 }
-                Result += ( $"{this.GetName()}剩下{Health}点生命值\n" );
+                Result += ($"{this.GetName()}剩下{Health}点生命值\n");
                 return Result;
             }
             //普通攻击未命中
             else
             {
-                return ( $"{Attacker.GetName()}普通攻击未命中\n" );
+                return ($"{Attacker.GetName()}普通攻击未命中\n");
             }
         }
         public virtual string GetName()
