@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CustomException;
+using System;
 using System.Text;
-using CustomException;
 
 namespace Competition.BaseClass
 {
     public class Competitor
     {
         //概率匿名委托
-        Func<int, bool> ProbabilityFunction = (int ProbabilityValue) =>
-            new Random().Next(1, 100) <= ProbabilityValue ? true : false;
+        readonly Func<int, bool> ProbabilityFunction = (int ProbabilityValue) =>
+            new Random().Next(1, 100) <= ProbabilityValue;
         public int Health { get; protected set; }
         public int Attack { get; protected set; }
         public int Defense { get; protected set; }
@@ -676,8 +676,11 @@ namespace Competition.BaseClass
         }
         public virtual string GetName()
         {
-
             return null;
+        }
+        public virtual void Refresh()
+        {
+            return;
         }
         //测试用方法，输出人物实时数据
         sealed public override string ToString()

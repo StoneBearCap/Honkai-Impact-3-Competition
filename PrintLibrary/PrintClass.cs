@@ -28,7 +28,7 @@ namespace PrintLibrary
         public string FileName { get; private set; } = default;
         public FilePrint(string data) : base(data)
         {
-            FileName = (string) typeof(PrintSetting).GetProperty("FileName").GetValue(new PrintSetting());
+            FileName = PrintSetting.FileName;
         }
         public void PrintMethod()
         {
@@ -38,10 +38,15 @@ namespace PrintLibrary
             }
         }
     }
-    public class PrintSetting
+    static public class PrintSetting
     {
-        static public string FileName { get; private set; } = default;
-        static public bool FileOrNot { get; private set; } = false;
-        static public bool ScreenOrNot { get; private set; } = false;
+        static public string FileName
+        {
+            get { if (ScreenOrNot == false) return null; else { return fileName; } }
+            set { if (ScreenOrNot == true) fileName = value; }
+        }
+        static private string fileName = null;
+        static public bool FileOrNot { get; set; } = false;
+        static public bool ScreenOrNot { get; set; } = false;
     }
 }

@@ -7,6 +7,10 @@ namespace CompetitorSetting
     {
         public Kiana()
         {
+            Refresh();
+        }
+        public override void Refresh()
+        {
             Health = 100;
             Attack = 24;
             Defense = 11;
@@ -20,7 +24,7 @@ namespace CompetitorSetting
             AttackPercentage = 100;
             HitRate = 100;
         }
-        public override string  GetName()
+        public override string GetName()
         {
             return "Kiana";
         }
@@ -29,6 +33,10 @@ namespace CompetitorSetting
     public class RaidenMei : Competitor
     {
         public RaidenMei()
+        {
+            Refresh();
+        }
+        public override void Refresh()
         {
             Health = 100;
             Attack = 24;
@@ -53,6 +61,10 @@ namespace CompetitorSetting
     {
         public RitaRossweisse()
         {
+            Refresh();
+        }
+        public override void Refresh()
+        {
             Health = 100;
             Attack = 26;
             Defense = 11;
@@ -75,6 +87,10 @@ namespace CompetitorSetting
     public class TheresaApocalypse : Competitor
     {
         public TheresaApocalypse()
+        {
+            Refresh();
+        }
+        public override void Refresh()
         {
             Health = 100;
             Attack = 19;
@@ -99,6 +115,10 @@ namespace CompetitorSetting
     {
         public CorvusCorax()
         {
+            Refresh();
+        }
+        public override void Refresh()
+        {
             Health = 100;
             Attack = 23;
             Defense = 14;
@@ -121,6 +141,10 @@ namespace CompetitorSetting
     public class Bronya : Competitor
     {
         public Bronya()
+        {
+            Refresh();
+        }
+        public override void Refresh()
         {
             Health = 100;
             Attack = 21;
@@ -145,6 +169,10 @@ namespace CompetitorSetting
     {
         public KallenAndSakura()
         {
+            Refresh();
+        }
+        public override void Refresh()
+        {
             Health = 100;
             Attack = 20;
             Defense = 9;
@@ -166,10 +194,14 @@ namespace CompetitorSetting
     //希儿
     public class SeeleVollerei : Competitor, ISeeleVollerei
     {
-        
+
         public ISeeleVollerei.SeeleVollereiColor Color { get; set; }
 
         public SeeleVollerei()
+        {
+            Refresh();
+        }
+        public override void Refresh()
         {
             Color = ISeeleVollerei.SeeleVollereiColor.White;
             Health = 100;
@@ -195,6 +227,10 @@ namespace CompetitorSetting
     {
         public FuHua()
         {
+            Refresh();
+        }
+        public override void Refresh()
+        {
             Health = 100;
             Attack = 17;
             Defense = 15;
@@ -217,6 +253,10 @@ namespace CompetitorSetting
     public class Himeko : Competitor
     {
         public Himeko()
+        {
+            Refresh();
+        }
+        public override void Refresh()
         {
             Health = 100;
             Attack = 23;
