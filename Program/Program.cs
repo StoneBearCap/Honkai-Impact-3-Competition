@@ -1,5 +1,4 @@
 ﻿using Competition.BaseClass;
-using Competition.Runtime;
 using CompetitorSetting;
 using PrintLibrary;
 using System;
@@ -12,7 +11,7 @@ namespace MainProgram
         {
             Competitor ReturnCompetitor(int Number)
             {
-                switch (Number)
+                switch(Number)
                 {
                     case 1:
                         return new Kiana();
@@ -49,49 +48,45 @@ namespace MainProgram
             int Round = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
             Console.WriteLine("1.文件输出 2.无文件输出");
-            PrintSetting.FileOrNot = Convert.ToInt32(Console.ReadLine()) == 1;
+            Print.FileOrNot = Convert.ToInt32(Console.ReadLine()) == 1;
             Console.Clear();
             Console.WriteLine("1.控制台输出 2.无控制台输出");
-            PrintSetting.ScreenOrNot = Convert.ToInt32(Console.ReadLine()) == 1;
+            Print.ScreenOrNot = Convert.ToInt32(Console.ReadLine()) == 1;
             Console.Clear();
-            if (PrintSetting.FileOrNot == true)
+            if(Print.FileOrNot == true)
             {
                 Console.WriteLine("文件名：");
-                PrintSetting.FileName = Console.ReadLine();
+                Print.FileName = Console.ReadLine();
                 Console.Clear();
             }
             int AW = 0, BW = 0;
-            var TCompetition = Activator.CreateInstance(typeof(Competition<,>).MakeGenericType(A.GetType(), B.GetType()), A, B);
-            for (int i = 1; i <= Round; i++)
+            var TCompetition = new Competition.Runtime.Competition(A, B);
+            for(int i = 1; i <= Round; i++)
             {
-                if (PrintSetting.ScreenOrNot == true)
+                if(Print.ScreenOrNot == true || Print.FileOrNot == true)
                 {
-                    TCompetition.GetType().GetProperty("TextResult").SetValue(TCompetition, TCompetition.GetType().GetProperty("TextResult").GetValue(TCompetition) + ($"第{i}局\n"));
+                    TCompetition.TextResult += ( $"第{i}局\n" );
                 }
-                TCompetition.GetType().GetMethod("TaskFunction").Invoke(TCompetition, null);
-                if (TCompetition.GetType().GetProperty("Winner").GetValue(TCompetition) == A)
+                TCompetition.TaskFunction();
+                if(TCompetition.Winner == A)
                 {
                     AW++;
                 }
-                else if (TCompetition.GetType().GetProperty("Winner").GetValue(TCompetition) == B)
+                else if(TCompetition.Winner == B)
                 {
                     BW++;
                 }
-                if (i == Round)
-                {
-                    if (PrintSetting.FileOrNot == true)
-                    {
-                        new FilePrint($"{AW} {BW}\n").PrintMethod();
-                    }
-                    break;
-                }
                 A.Refresh();
                 B.Refresh();
-                TCompetition.GetType().GetMethod("Refresh").Invoke(TCompetition, null);
+                TCompetition.Refresh();
             }
-            if (PrintSetting.ScreenOrNot == true)
+            if(Print.FileOrNot == true)
             {
-                Console.WriteLine($"{AW} {BW}");
+                new FilePrint($"{AW} {BW}\n").PrintMethod();
+            }
+            if(Print.ScreenOrNot == true)
+            {
+                new ScreenPrint($"{AW} {BW}").PrintMethod();
             }
             Console.ReadLine();
         }

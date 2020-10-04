@@ -194,9 +194,7 @@ namespace CompetitorSetting
     //希儿
     public class SeeleVollerei : Competitor, ISeeleVollerei
     {
-
         public ISeeleVollerei.SeeleVollereiColor Color { get; set; }
-
         public SeeleVollerei()
         {
             Refresh();

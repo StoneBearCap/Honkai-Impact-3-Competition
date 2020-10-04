@@ -7,6 +7,9 @@ namespace PrintLibrary
     public class Print
     {
         public string Data { get; protected set; } = default;
+        static public string FileName { get; set; } = null;
+        static public bool FileOrNot { get; set; } = false;
+        static public bool ScreenOrNot { get; set; } = false;
         public Print(string data)
         {
             Data = data;
@@ -25,28 +28,16 @@ namespace PrintLibrary
     }
     public class FilePrint : Print
     {
-        public string FileName { get; private set; } = default;
         public FilePrint(string data) : base(data)
         {
-            FileName = PrintSetting.FileName;
+            
         }
         public void PrintMethod()
         {
-            using(var FileOperation = new StreamWriter(FileName, true, Encoding.UTF8, 30000))
+            using (var FileOperation = new StreamWriter(FileName, true, Encoding.UTF8, 30000))
             {
                 FileOperation.WriteLine(Data);
             }
         }
-    }
-    static public class PrintSetting
-    {
-        static public string FileName
-        {
-            get { if (ScreenOrNot == false) return null; else { return fileName; } }
-            set { if (ScreenOrNot == true) fileName = value; }
-        }
-        static private string fileName = null;
-        static public bool FileOrNot { get; set; } = false;
-        static public bool ScreenOrNot { get; set; } = false;
     }
 }
